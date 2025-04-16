@@ -1,0 +1,653 @@
+Initial delay: 90
+Original power: 13318.8
+Optimized power: 5884.72
+
+INPUT(G1gat)
+INPUT(G8gat)
+INPUT(G13gat)
+INPUT(G17gat)
+INPUT(G26gat)
+INPUT(G29gat)
+INPUT(G36gat)
+INPUT(G42gat)
+INPUT(G51gat)
+INPUT(G55gat)
+INPUT(G59gat)
+INPUT(G68gat)
+INPUT(G72gat)
+INPUT(G73gat)
+INPUT(G74gat)
+INPUT(G75gat)
+INPUT(G80gat)
+INPUT(G85gat)
+INPUT(G86gat)
+INPUT(G87gat)
+INPUT(G88gat)
+INPUT(G89gat)
+INPUT(G90gat)
+INPUT(G91gat)
+INPUT(G96gat)
+INPUT(G101gat)
+INPUT(G106gat)
+INPUT(G111gat)
+INPUT(G116gat)
+INPUT(G121gat)
+INPUT(G126gat)
+INPUT(G130gat)
+INPUT(G135gat)
+INPUT(G138gat)
+INPUT(G143gat)
+INPUT(G146gat)
+INPUT(G149gat)
+INPUT(G152gat)
+INPUT(G153gat)
+INPUT(G156gat)
+INPUT(G159gat)
+INPUT(G165gat)
+INPUT(G171gat)
+INPUT(G177gat)
+INPUT(G183gat)
+INPUT(G189gat)
+INPUT(G195gat)
+INPUT(G201gat)
+INPUT(G207gat)
+INPUT(G210gat)
+INPUT(G219gat)
+INPUT(G228gat)
+INPUT(G237gat)
+INPUT(G246gat)
+INPUT(G255gat)
+INPUT(G259gat)
+INPUT(G260gat)
+INPUT(G261gat)
+INPUT(G267gat)
+INPUT(G268gat)
+
+OUTPUT(G388gat)
+OUTPUT(G389gat)
+OUTPUT(G390gat)
+OUTPUT(G391gat)
+OUTPUT(G418gat)
+OUTPUT(G419gat)
+OUTPUT(G420gat)
+OUTPUT(G421gat)
+OUTPUT(G422gat)
+OUTPUT(G423gat)
+OUTPUT(G446gat)
+OUTPUT(G447gat)
+OUTPUT(G448gat)
+OUTPUT(G449gat)
+OUTPUT(G450gat)
+OUTPUT(G767gat)
+OUTPUT(G768gat)
+OUTPUT(G850gat)
+OUTPUT(G863gat)
+OUTPUT(G864gat)
+OUTPUT(G865gat)
+OUTPUT(G866gat)
+OUTPUT(G874gat)
+OUTPUT(G878gat)
+OUTPUT(G879gat)
+OUTPUT(G880gat)
+
+n87   = NAND1(G29gat, G75gat)	    #slack = 0.24    
+n88   = NAND2(G42gat, INV0  )	    #slack = 73.6    
+INV0  = INV2 (n87   )	            #slack = 73.6    
+n89   = NAND2(G29gat, G36gat)	    #slack = 45.98   
+n90   = NAND2(G80gat, INV1  )	    #slack = 62.83   
+INV1  = INV2 (n89   )	            #slack = 62.83   
+n91   = NAND2(G42gat, INV2  )	    #slack = 45.98   
+INV2  = INV2 (n89   )	            #slack = 45.98   
+n92   = NAND2(G85gat, G86gat)	    #slack = 80.71   
+n93   = NAND1(G1gat , G8gat )	    #slack = 0.6     
+n94   = NAND1(G13gat, INV3  )	    #slack = 0.69    
+INV3  = INV3 (n93   )	            #slack = 0.69    
+n95   = NAND2(G17gat, INV4  )	    #slack = 68.49   
+INV4  = INV2 (n94   )	            #slack = 68.49   
+n96   = NAND1(G1gat , G26gat)	    #slack = 0       
+n97   = NAND2(G13gat, INV5  )	    #slack = 50.77   
+INV5  = INV2 (n96   )	            #slack = 50.77   
+n98   = NAND2(G17gat, INV6  )	    #slack = 50.77   
+INV6  = INV2 (n97   )	            #slack = 50.77   
+G419gat = NAND2(n91   , INV7  )	    #slack = 49.65   
+INV7  = INV2 (n98   )	            #slack = 50.77   
+n100  = NAND1(G59gat, G75gat)	    #slack = 1.77    
+G420gat = NAND2(G80gat, INV8  )	    #slack = 80.58   
+INV8  = INV2 (n100  )	            #slack = 80.58   
+n102  = NAND2(G36gat, G59gat)	    #slack = 69.81   
+G421gat = NAND2(G80gat, INV9  )	    #slack = 69.81   
+INV9  = INV2 (n102  )	            #slack = 69.81   
+G422gat = NAND2(G42gat, INV10 )	    #slack = 69.81   
+INV10 = INV2 (n102  )	            #slack = 69.81   
+n105  = NAND2(INV11 , INV12 )	    #slack = 62.83   
+INV11 = INV2 (G87gat)	            #slack = 62.83   
+INV12 = INV2 (G88gat)	            #slack = 62.83   
+n106  = NAND2(G90gat, n105  )	    #slack = 62.83   
+G446gat = NAND2(INV13 , INV14 )	    #slack = 45.98   
+INV13 = INV2 (n91   )	            #slack = 45.98   
+INV14 = INV2 (n98   )	            #slack = 50.77   
+n108  = NAND1(G51gat, INV15 )	    #slack = 0       
+INV15 = INV1 (n96   )	            #slack = 0       
+n109  = NAND3(G55gat, INV16 )	    #slack = 0.69    
+INV16 = INV2 (n94   )	            #slack = 0.69    
+n110  = NAND2(G29gat, G68gat)	    #slack = 68.78   
+n111  = NAND2(INV17 , INV18 )	    #slack = 54.66   
+INV17 = INV2 (n109  )	            #slack = 54.66   
+INV18 = INV2 (n110  )	            #slack = 68.78   
+n112  = NAND2(G59gat, G68gat)	    #slack = 56.85   
+n113  = NAND2(G74gat, INV19 )	    #slack = 56.85   
+INV19 = INV2 (n112  )	            #slack = 56.85   
+n114  = NAND2(INV20 , INV21 )	    #slack = 54.66   
+INV20 = INV2 (n109  )	            #slack = 54.66   
+INV21 = INV2 (n113  )	            #slack = 56.85   
+n115  = NAND2(G89gat, n105  )	    #slack = 62.83   
+n116  = NAND2(G91gat, G96gat)	    #slack = 1.08    
+n117  = NAND2(INV22 , INV23 )	    #slack = 0.08    
+INV22 = INV1 (G91gat)	            #slack = 0.08    
+INV23 = INV1 (G96gat)	            #slack = 0.08    
+n118  = NAND3(n116  , n117  )	    #slack = 0.08    
+n119  = NAND2(G101gat, G106gat)	    #slack = 1.08    
+n120  = NAND2(INV24 , INV25 )	    #slack = 0.08    
+INV24 = INV1 (G101gat)	            #slack = 0.08    
+INV25 = INV1 (G106gat)	            #slack = 0.08    
+n121  = NAND3(n119  , n120  )	    #slack = 0.08    
+n122  = NAND2(n118  , n121  )	    #slack = 3.75    
+n123  = NAND2(INV26 , INV27 )	    #slack = 0.08    
+INV26 = INV2 (n118  )	            #slack = 0.08    
+INV27 = INV2 (n121  )	            #slack = 0.08    
+n124  = NAND2(n122  , n123  )	    #slack = 0.08    
+n125  = NAND2(G130gat, INV28 )	    #slack = 0.08    
+INV28 = INV2 (n124  )	            #slack = 0.08    
+n126  = NAND2(INV29 , n124  )	    #slack = 3.75    
+INV29 = INV2 (G130gat)	            #slack = 42.64   
+n127  = NAND2(n125  , n126  )	    #slack = 0.08    
+n128  = NAND2(G111gat, G116gat)	    #slack = 1.08    
+n129  = NAND2(INV30 , INV31 )	    #slack = 0.08    
+INV30 = INV1 (G111gat)	            #slack = 0.08    
+INV31 = INV1 (G116gat)	            #slack = 0.08    
+n130  = NAND3(n128  , n129  )	    #slack = 0.08    
+n131  = NAND2(G121gat, G126gat)	    #slack = 1.08    
+n132  = NAND2(INV32 , INV33 )	    #slack = 0.08    
+INV32 = INV1 (G121gat)	            #slack = 0.08    
+INV33 = INV1 (G126gat)	            #slack = 0.08    
+n133  = NAND3(n131  , n132  )	    #slack = 0.08    
+n134  = NAND2(n130  , n133  )	    #slack = 3.75    
+n135  = NAND2(INV34 , INV35 )	    #slack = 0.08    
+INV34 = INV2 (n130  )	            #slack = 0.08    
+INV35 = INV2 (n133  )	            #slack = 0.08    
+n136  = NAND2(n134  , n135  )	    #slack = 0.08    
+n137  = NAND2(G135gat, INV36 )	    #slack = 0.08    
+INV36 = INV2 (n136  )	            #slack = 0.08    
+n138  = NAND2(INV37 , n136  )	    #slack = 3.75    
+INV37 = INV2 (G135gat)	            #slack = 42.64   
+n139  = NAND2(n137  , n138  )	    #slack = 0.08    
+n140  = NAND2(n127  , n139  )	    #slack = 3.75    
+n141  = NAND2(INV38 , INV39 )	    #slack = 0.08    
+INV38 = INV2 (n127  )	            #slack = 0.08    
+INV39 = INV2 (n139  )	            #slack = 0.08    
+n142  = NAND2(n140  , n141  )	    #slack = 0.08    
+n143  = NAND2(G159gat, G165gat)	    #slack = 1.08    
+n144  = NAND2(INV40 , INV41 )	    #slack = 0.08    
+INV40 = INV1 (G159gat)	            #slack = 0.08    
+INV41 = INV1 (G165gat)	            #slack = 0.08    
+n145  = NAND3(n143  , n144  )	    #slack = 0.08    
+n146  = NAND2(G171gat, G177gat)	    #slack = 1.08    
+n147  = NAND2(INV42 , INV43 )	    #slack = 0.08    
+INV42 = INV1 (G171gat)	            #slack = 0.08    
+INV43 = INV1 (G177gat)	            #slack = 0.08    
+n148  = NAND3(n146  , n147  )	    #slack = 0.08    
+n149  = NAND2(n145  , n148  )	    #slack = 3.75    
+n150  = NAND2(INV44 , INV45 )	    #slack = 0.08    
+INV44 = INV2 (n145  )	            #slack = 0.08    
+INV45 = INV2 (n148  )	            #slack = 0.08    
+n151  = NAND2(n149  , n150  )	    #slack = 0.08    
+n152  = NAND2(G130gat, INV46 )	    #slack = 0.08    
+INV46 = INV2 (n151  )	            #slack = 0.08    
+n153  = NAND2(INV47 , n151  )	    #slack = 3.75    
+INV47 = INV2 (G130gat)	            #slack = 42.64   
+n154  = NAND2(n152  , n153  )	    #slack = 0.08    
+n155  = NAND2(G183gat, G189gat)	    #slack = 1.08    
+n156  = NAND2(INV48 , INV49 )	    #slack = 0.08    
+INV48 = INV1 (G183gat)	            #slack = 0.08    
+INV49 = INV1 (G189gat)	            #slack = 0.08    
+n157  = NAND3(n155  , n156  )	    #slack = 0.08    
+n158  = NAND2(G195gat, G201gat)	    #slack = 1.08    
+n159  = NAND2(INV50 , INV51 )	    #slack = 0.08    
+INV50 = INV1 (G195gat)	            #slack = 0.08    
+INV51 = INV1 (G201gat)	            #slack = 0.08    
+n160  = NAND3(n158  , n159  )	    #slack = 0.08    
+n161  = NAND2(n157  , n160  )	    #slack = 3.75    
+n162  = NAND2(INV52 , INV53 )	    #slack = 0.08    
+INV52 = INV2 (n157  )	            #slack = 0.08    
+INV53 = INV2 (n160  )	            #slack = 0.08    
+n163  = NAND2(n161  , n162  )	    #slack = 0.08    
+n164  = NAND2(G207gat, INV54 )	    #slack = 0.08    
+INV54 = INV2 (n163  )	            #slack = 0.08    
+n165  = NAND2(INV55 , n163  )	    #slack = 3.75    
+INV55 = INV2 (G207gat)	            #slack = 42.64   
+n166  = NAND2(n164  , n165  )	    #slack = 0.08    
+n167  = NAND2(n154  , n166  )	    #slack = 3.75    
+n168  = NAND2(INV56 , INV57 )	    #slack = 0.08    
+INV56 = INV2 (n154  )	            #slack = 0.08    
+INV57 = INV2 (n166  )	            #slack = 0.08    
+n169  = NAND2(n167  , n168  )	    #slack = 0.08    
+n170  = NAND2(G121gat, G210gat)	    #slack = 49.9    
+n171  = NAND1(G80gat, INV58 )	    #slack = 0.24    
+INV58 = INV2 (n87   )	            #slack = 0.24    
+n172  = NAND1(INV59 , INV60 )	    #slack = 0.24    
+INV59 = INV3 (n108  )	            #slack = 0.59    
+INV60 = INV2 (n171  )	            #slack = 0.24    
+n173  = NAND3(G55gat, INV61 )	    #slack = 0.24    
+INV61 = INV3 (n172  )	            #slack = 0.24    
+n174  = NAND1(INV62 , INV63 )	    #slack = 0.24    
+INV62 = INV2 (G268gat)	            #slack = 22.29   
+INV63 = INV2 (n173  )	            #slack = 0.24    
+n175  = NAND2(G59gat, G156gat)	    #slack = 5.28    
+n176  = NAND1(INV64 , n175  )	    #slack = 0.34    
+INV64 = INV1 (n108  )	            #slack = 0.34    
+n177  = NAND1(G17gat, INV65 )	    #slack = 0.65    
+INV65 = INV3 (n176  )	            #slack = 0.65    
+n178  = NAND1(G1gat , n177  )	    #slack = 0.65    
+n179  = NAND1(G153gat, n178  )	    #slack = 0.72    
+n180  = NAND1(INV66 , INV67 )	    #slack = 0.53    
+INV66 = INV1 (G17gat)	            #slack = 0.53    
+INV67 = INV1 (G42gat)	            #slack = 0.53    
+n181  = NAND1(G17gat, G42gat)	    #slack = 1.53    
+n182  = NAND1(n180  , n181  )	    #slack = 0.53    
+n183  = NAND1(G59gat, INV68 )	    #slack = 0.53    
+INV68 = INV1 (n182  )	            #slack = 0.53    
+n184  = NAND1(G156gat, INV69 )	    #slack = 0.53    
+INV69 = INV1 (n183  )	            #slack = 0.53    
+n185  = NAND1(INV70 , INV71 )	    #slack = 0       
+INV70 = INV1 (n108  )	            #slack = 0       
+INV71 = INV3 (n184  )	            #slack = 0.53    
+n186  = NAND1(G51gat, INV72 )	    #slack = 0.6     
+INV72 = INV1 (n93   )	            #slack = 0.6     
+n187  = NAND1(G17gat, INV73 )	    #slack = 0.6     
+INV73 = INV1 (n186  )	            #slack = 0.6     
+n188  = NAND3(G42gat, INV74 )	    #slack = 1.77    
+INV74 = INV3 (n100  )	            #slack = 1.77    
+n189  = NAND3(INV75 , n188  )	    #slack = 0.6     
+INV75 = INV1 (n187  )	            #slack = 0.6     
+n190  = NAND1(n185  , n189  )	    #slack = 0       
+n191  = NAND1(G126gat, n190  )	    #slack = 0.07    
+n192  = NAND1(n179  , n191  )	    #slack = 0.07    
+n193  = NAND1(n174  , INV76 )	    #slack = 0.07    
+INV76 = INV1 (n192  )	            #slack = 0.07    
+n194  = NAND1(INV77 , INV78 )	    #slack = 0.24    
+INV77 = INV2 (G201gat)	            #slack = 34.73   
+INV78 = INV1 (n193  )	            #slack = 0.24    
+n195  = NAND1(G201gat, n193  )	    #slack = 0.07    
+n196  = NAND1(n194  , n195  )	    #slack = 0.36    
+n197  = NAND1(INV79 , n196  )	    #slack = 1.36    
+INV79 = INV2 (G261gat)	            #slack = 47.49   
+n198  = NAND1(G261gat, INV80 )	    #slack = 0.36    
+INV80 = INV1 (n196  )	            #slack = 0.36    
+n199  = NAND1(n197  , n198  )	    #slack = 0.36    
+n200  = NAND1(G219gat, INV81 )	    #slack = 0.36    
+INV81 = INV1 (n199  )	            #slack = 0.36    
+n201  = NAND1(n170  , n200  )	    #slack = 0.36    
+n202  = NAND3(G228gat, INV82 )	    #slack = 0.37    
+INV82 = INV3 (n196  )	            #slack = 0.37    
+n203  = NAND2(G237gat, INV83 )	    #slack = 1.15    
+INV83 = INV3 (n195  )	            #slack = 1.15    
+n204  = NAND3(n202  , n203  )	    #slack = 0.37    
+n205  = NAND2(G255gat, G267gat)	    #slack = 55.57   
+n206  = NAND2(G246gat, n193  )	    #slack = 18.41   
+n207  = NAND2(n205  , n206  )	    #slack = 18.41   
+n208  = NAND1(G42gat, G59gat)	    #slack = 1.31    
+n209  = NAND3(G68gat, INV84 )	    #slack = 1.31    
+INV84 = INV2 (n208  )	            #slack = 1.31    
+n210  = NAND2(G72gat, INV85 )	    #slack = 1.31    
+INV85 = INV2 (n209  )	            #slack = 1.31    
+n211  = NAND2(INV86 , INV87 )	    #slack = 0.69    
+INV86 = INV2 (n109  )	            #slack = 0.69    
+INV87 = INV2 (n210  )	            #slack = 1.31    
+n212  = NAND3(G73gat, INV88 )	    #slack = 0.69    
+INV88 = INV2 (n211  )	            #slack = 0.69    
+n213  = NAND2(G201gat, INV89 )	    #slack = 12.62   
+INV89 = INV2 (n212  )	            #slack = 12.62   
+n214  = NAND2(INV90 , INV91 )	    #slack = 0.36    
+INV90 = INV2 (n201  )	            #slack = 0.36    
+INV91 = INV2 (n204  )	            #slack = 0.37    
+n215  = NAND2(INV92 , INV93 )	    #slack = 0.36    
+INV92 = INV2 (n207  )	            #slack = 18.41   
+INV93 = INV2 (n214  )	            #slack = 0.36    
+G850gat = NAND2(n213  , INV94 )	    #slack = 0.36    
+INV94 = INV2 (n215  )	            #slack = 0.36    
+n217  = NAND2(G106gat, G210gat)	    #slack = 59.67   
+n218  = NAND1(G143gat, n178  )	    #slack = 1.01    
+n219  = NAND1(G111gat, n190  )	    #slack = 0.36    
+n220  = NAND1(n218  , n219  )	    #slack = 0.36    
+n221  = NAND1(n174  , INV95 )	    #slack = 0.36    
+INV95 = INV3 (n220  )	            #slack = 0.36    
+n222  = NAND3(INV96 , INV97 )	    #slack = 0.36    
+INV96 = INV2 (G183gat)	            #slack = 36.19   
+INV97 = INV3 (n221  )	            #slack = 0.36    
+n223  = NAND1(G183gat, n221  )	    #slack = 4.31    
+n224  = NAND1(n222  , n223  )	    #slack = 0.36    
+n225  = NAND1(G146gat, n178  )	    #slack = 0.9     
+n226  = NAND1(G116gat, n190  )	    #slack = 0.25    
+n227  = NAND1(n225  , n226  )	    #slack = 0.25    
+n228  = NAND1(n174  , INV98 )	    #slack = 0.25    
+INV98 = INV1 (n227  )	            #slack = 0.25    
+n229  = NAND1(G189gat, n228  )	    #slack = 1.25    
+n230  = NAND1(INV99 , INV100)	    #slack = 0.25    
+INV99 = INV2 (G189gat)	            #slack = 34.74   
+INV100 = INV1 (n228  )	            #slack = 0.25    
+n231  = NAND1(G149gat, n178  )	    #slack = 0.65    
+n232  = NAND1(G121gat, n190  )	    #slack = 0       
+n233  = NAND1(n231  , n232  )	    #slack = 0       
+n234  = NAND1(n174  , INV101)	    #slack = 0       
+INV101 = INV1 (n233  )	            #slack = 0       
+n235  = NAND1(G195gat, n234  )	    #slack = 0.1     
+n236  = NAND1(n230  , INV102)	    #slack = 0.1     
+INV102 = INV3 (n235  )	            #slack = 0.1     
+n237  = NAND1(INV103, INV104)	    #slack = 0       
+INV103 = INV2 (G195gat)	            #slack = 34.49   
+INV104 = INV1 (n234  )	            #slack = 0       
+n238  = NAND1(n230  , n237  )	    #slack = 0       
+n239  = NAND1(INV105, INV106)	    #slack = 0       
+INV105 = INV2 (n195  )	            #slack = 0.33    
+INV106 = INV1 (n238  )	            #slack = 0       
+n240  = NAND1(n194  , INV107)	    #slack = 0       
+INV107 = INV1 (n238  )	            #slack = 0       
+n241  = NAND1(G261gat, INV108)	    #slack = 0       
+INV108 = INV1 (n240  )	            #slack = 0       
+n242  = NAND1(n229  , n236  )	    #slack = 0.1     
+n243  = NAND1(n239  , INV109)	    #slack = 0       
+INV109 = INV3 (n242  )	            #slack = 0.1     
+n244  = NAND1(n241  , INV110)	    #slack = 0       
+INV110 = INV1 (n243  )	            #slack = 0       
+n245  = NAND1(n224  , INV111)	    #slack = 0.46    
+INV111 = INV1 (n244  )	            #slack = 0.46    
+n246  = NAND1(INV112, n244  )	    #slack = 1.46    
+INV112 = INV2 (n224  )	            #slack = 5.05    
+n247  = NAND1(n245  , n246  )	    #slack = 0.46    
+n248  = NAND1(G219gat, INV113)	    #slack = 0.46    
+INV113 = INV3 (n247  )	            #slack = 0.46    
+n249  = NAND3(n217  , n248  )	    #slack = 0.46    
+n250  = NAND2(G228gat, INV114)	    #slack = 0.36    
+INV114 = INV2 (n224  )	            #slack = 0.36    
+n251  = NAND2(G237gat, INV115)	    #slack = 9.19    
+INV115 = INV2 (n223  )	            #slack = 9.19    
+n252  = NAND2(n250  , n251  )	    #slack = 0.36    
+n253  = NAND2(G246gat, n221  )	    #slack = 29.67   
+n254  = NAND2(G183gat, INV116)	    #slack = 0.69    
+INV116 = INV2 (n212  )	            #slack = 0.69    
+n255  = NAND2(n253  , n254  )	    #slack = 0.69    
+n256  = NAND2(INV117, INV118)	    #slack = 0.36    
+INV117 = INV2 (n249  )	            #slack = 0.46    
+INV118 = INV2 (n252  )	            #slack = 0.36    
+G863gat = NAND2(INV119, INV120)	    #slack = 0.36    
+INV119 = INV2 (n255  )	            #slack = 0.69    
+INV120 = INV2 (n256  )	            #slack = 0.36    
+n258  = NAND2(G111gat, G210gat)	    #slack = 56      
+n259  = NAND1(n229  , n230  )	    #slack = 0.25    
+n260  = NAND1(INV121, n237  )	    #slack = 0.07    
+INV121 = INV1 (n195  )	            #slack = 0.07    
+n261  = NAND1(n194  , n237  )	    #slack = 0.84    
+n262  = NAND1(G261gat, INV122)	    #slack = 0.84    
+INV122 = INV3 (n261  )	            #slack = 0.84    
+n263  = NAND1(n235  , n260  )	    #slack = 0.07    
+n264  = NAND1(n262  , INV123)	    #slack = 0.07    
+INV123 = INV1 (n263  )	            #slack = 0.07    
+n265  = NAND1(n259  , INV124)	    #slack = 0.56    
+INV124 = INV3 (n264  )	            #slack = 0.56    
+n266  = NAND3(INV125, n264  )	    #slack = 0.07    
+INV125 = INV2 (n259  )	            #slack = 2.84    
+n267  = NAND1(n265  , n266  )	    #slack = 0.07    
+n268  = NAND1(G219gat, INV126)	    #slack = 0.07    
+INV126 = INV3 (n267  )	            #slack = 0.07    
+n269  = NAND1(n258  , n268  )	    #slack = 0.07    
+n270  = NAND3(G228gat, INV127)	    #slack = 0.25    
+INV127 = INV2 (n259  )	            #slack = 0.25    
+n271  = NAND2(G237gat, INV128)	    #slack = 2.03    
+INV128 = INV2 (n229  )	            #slack = 2.03    
+n272  = NAND2(n270  , n271  )	    #slack = 0.25    
+n273  = NAND2(G255gat, G259gat)	    #slack = 55.57   
+n274  = NAND2(G246gat, n228  )	    #slack = 18.41   
+n275  = NAND2(n273  , n274  )	    #slack = 18.41   
+n276  = NAND2(G189gat, INV129)	    #slack = 12.62   
+INV129 = INV2 (n212  )	            #slack = 12.62   
+n277  = NAND3(INV130, INV131)	    #slack = 0.07    
+INV130 = INV3 (n269  )	            #slack = 0.07    
+INV131 = INV2 (n272  )	            #slack = 0.25    
+n278  = NAND2(INV132, INV133)	    #slack = 0.07    
+INV132 = INV2 (n275  )	            #slack = 18.41   
+INV133 = INV2 (n277  )	            #slack = 0.07    
+G864gat = NAND2(n276  , INV134)	    #slack = 0.07    
+INV134 = INV2 (n278  )	            #slack = 0.07    
+n280  = NAND2(G116gat, G210gat)	    #slack = 49.9    
+n281  = NAND1(n235  , n237  )	    #slack = 0.13    
+n282  = NAND1(G261gat, n194  )	    #slack = 0.24    
+n283  = NAND1(n195  , n282  )	    #slack = 0.24    
+n284  = NAND1(n281  , INV135)	    #slack = 0.24    
+INV135 = INV1 (n283  )	            #slack = 0.24    
+n285  = NAND1(INV136, n283  )	    #slack = 0.13    
+INV136 = INV3 (n281  )	            #slack = 0.13    
+n286  = NAND1(n284  , n285  )	    #slack = 0.13    
+n287  = NAND1(G219gat, INV137)	    #slack = 0.13    
+INV137 = INV1 (n286  )	            #slack = 0.13    
+n288  = NAND1(n280  , n287  )	    #slack = 0.13    
+n289  = NAND3(G228gat, INV138)	    #slack = 0.81    
+INV138 = INV3 (n281  )	            #slack = 0.81    
+n290  = NAND2(G237gat, INV139)	    #slack = 0.59    
+INV139 = INV2 (n235  )	            #slack = 0.59    
+n291  = NAND3(n289  , n290  )	    #slack = 0.59    
+n292  = NAND2(G255gat, G260gat)	    #slack = 55.57   
+n293  = NAND2(G246gat, n234  )	    #slack = 18.41   
+n294  = NAND2(n292  , n293  )	    #slack = 18.41   
+n295  = NAND2(G195gat, INV140)	    #slack = 12.62   
+INV140 = INV2 (n212  )	            #slack = 12.62   
+n296  = NAND2(INV141, INV142)	    #slack = 0.13    
+INV141 = INV2 (n288  )	            #slack = 0.13    
+INV142 = INV2 (n291  )	            #slack = 0.59    
+n297  = NAND2(INV143, INV144)	    #slack = 0.13    
+INV143 = INV2 (n294  )	            #slack = 18.41   
+INV144 = INV2 (n296  )	            #slack = 0.13    
+G865gat = NAND2(n295  , INV145)	    #slack = 0.13    
+INV145 = INV2 (n297  )	            #slack = 0.13    
+n299  = NAND2(G8gat , G138gat)	    #slack = 21.17   
+n300  = NAND1(G91gat, n190  )	    #slack = 0.15    
+n301  = NAND1(n299  , n300  )	    #slack = 0.15    
+n302  = NAND1(G55gat, INV146)	    #slack = 0.34    
+INV146 = INV1 (n176  )	            #slack = 0.34    
+n303  = NAND1(G143gat, INV147)	    #slack = 1.13    
+INV147 = INV3 (n302  )	            #slack = 1.13    
+n304  = NAND1(G17gat, INV148)	    #slack = 0.44    
+INV148 = INV1 (n108  )	            #slack = 0.44    
+n305  = NAND1(INV149, INV150)	    #slack = 0.44    
+INV149 = INV2 (n171  )	            #slack = 3.09    
+INV150 = INV3 (n304  )	            #slack = 0.44    
+n306  = NAND1(INV151, INV152)	    #slack = 0.44    
+INV151 = INV2 (G268gat)	            #slack = 17.31   
+INV152 = INV3 (n305  )	            #slack = 0.44    
+n307  = NAND1(n303  , n306  )	    #slack = 1.13    
+n308  = NAND1(INV153, INV154)	    #slack = 0.15    
+INV153 = INV1 (n301  )	            #slack = 0.15    
+INV154 = INV3 (n307  )	            #slack = 1.13    
+n309  = NAND1(G159gat, n308  )	    #slack = 0.38    
+n310  = NAND2(G51gat, G138gat)	    #slack = 21.34   
+n311  = NAND1(G96gat, n190  )	    #slack = 0.32    
+n312  = NAND1(n310  , n311  )	    #slack = 0.32    
+n313  = NAND1(G146gat, INV155)	    #slack = 0.64    
+INV155 = INV1 (n302  )	            #slack = 0.64    
+n314  = NAND1(n306  , n313  )	    #slack = 0.64    
+n315  = NAND1(INV156, INV157)	    #slack = 0.32    
+INV156 = INV3 (n312  )	            #slack = 0.32    
+INV157 = INV2 (n314  )	            #slack = 0.64    
+n316  = NAND1(G165gat, n315  )	    #slack = 3.99    
+n317  = NAND1(INV158, INV159)	    #slack = 0.32    
+INV158 = INV2 (G165gat)	            #slack = 36.15   
+INV159 = INV3 (n315  )	            #slack = 0.32    
+n318  = NAND2(G17gat, G138gat)	    #slack = 21.13   
+n319  = NAND1(G101gat, n190  )	    #slack = 0.11    
+n320  = NAND1(n318  , n319  )	    #slack = 0.11    
+n321  = NAND1(G149gat, INV160)	    #slack = 1.09    
+INV160 = INV3 (n302  )	            #slack = 1.09    
+n322  = NAND1(n306  , n321  )	    #slack = 1.09    
+n323  = NAND1(INV161, INV162)	    #slack = 0.11    
+INV161 = INV1 (n320  )	            #slack = 0.11    
+INV162 = INV3 (n322  )	            #slack = 1.09    
+n324  = NAND1(G171gat, n323  )	    #slack = 0.22    
+n325  = NAND1(n317  , INV163)	    #slack = 0.22    
+INV163 = INV1 (n324  )	            #slack = 0.22    
+n326  = NAND1(INV164, INV165)	    #slack = 0.11    
+INV164 = INV2 (G171gat)	            #slack = 35.27   
+INV165 = INV3 (n323  )	            #slack = 0.11    
+n327  = NAND2(G138gat, G152gat)	    #slack = 21.04   
+n328  = NAND1(G106gat, n190  )	    #slack = 0.02    
+n329  = NAND1(n327  , n328  )	    #slack = 0.02    
+n330  = NAND1(G153gat, INV166)	    #slack = 0.34    
+INV166 = INV1 (n302  )	            #slack = 0.34    
+n331  = NAND1(n306  , n330  )	    #slack = 0.34    
+n332  = NAND1(INV167, INV168)	    #slack = 0.02    
+INV167 = INV3 (n329  )	            #slack = 0.02    
+INV168 = INV2 (n331  )	            #slack = 0.34    
+n333  = NAND1(G177gat, n332  )	    #slack = 0.25    
+n334  = NAND1(n317  , n326  )	    #slack = 0.11    
+n335  = NAND2(INV169, INV170)	    #slack = 0.11    
+INV169 = INV2 (n333  )	            #slack = 1.11    
+INV170 = INV3 (n334  )	            #slack = 0.11    
+n336  = NAND1(INV171, INV172)	    #slack = 0.02    
+INV171 = INV2 (G177gat)	            #slack = 35.85   
+INV172 = INV3 (n332  )	            #slack = 0.02    
+n337  = NAND1(n222  , n244  )	    #slack = 0       
+n338  = NAND1(n223  , n337  )	    #slack = 0       
+n339  = NAND2(INV173, n336  )	    #slack = 4.37    
+INV173 = INV2 (n334  )	            #slack = 4.37    
+n340  = NAND1(n338  , INV174)	    #slack = 0       
+INV174 = INV2 (n339  )	            #slack = 4.37    
+n341  = NAND2(n316  , n325  )	    #slack = 0.22    
+n342  = NAND2(n335  , INV175)	    #slack = 0.11    
+INV175 = INV2 (n341  )	            #slack = 0.22    
+n343  = NAND1(n340  , INV176)	    #slack = 0       
+INV176 = INV2 (n342  )	            #slack = 0.11    
+n344  = NAND1(INV177, INV178)	    #slack = 0.15    
+INV177 = INV2 (G159gat)	            #slack = 35.31   
+INV178 = INV3 (n308  )	            #slack = 0.15    
+n345  = NAND2(n343  , n344  )	    #slack = 3.99    
+G866gat = NAND2(n309  , n345  )	    #slack = 3.99    
+n347  = NAND2(G101gat, G210gat)	    #slack = 68.6    
+n348  = NAND3(n333  , n336  )	    #slack = 0.02    
+n349  = NAND1(INV179, n348  )	    #slack = 0.3     
+INV179 = INV1 (n338  )	            #slack = 0.3     
+n350  = NAND1(n338  , INV180)	    #slack = 1.3     
+INV180 = INV2 (n348  )	            #slack = 10.21   
+n351  = NAND1(n349  , n350  )	    #slack = 0.3     
+n352  = NAND1(G219gat, INV181)	    #slack = 0.3     
+INV181 = INV1 (n351  )	            #slack = 0.3     
+n353  = NAND1(n347  , n352  )	    #slack = 0.3     
+n354  = NAND2(G228gat, INV182)	    #slack = 0.02    
+INV182 = INV2 (n348  )	            #slack = 0.02    
+n355  = NAND2(G237gat, INV183)	    #slack = 10.41   
+INV183 = INV2 (n333  )	            #slack = 10.41   
+n356  = NAND2(n354  , n355  )	    #slack = 0.02    
+n357  = NAND2(G246gat, n332  )	    #slack = 29.67   
+n358  = NAND2(G177gat, INV184)	    #slack = 0.69    
+INV184 = INV2 (n212  )	            #slack = 0.69    
+n359  = NAND2(n357  , n358  )	    #slack = 0.69    
+n360  = NAND3(INV185, INV186)	    #slack = 0.02    
+INV185 = INV1 (n353  )	            #slack = 0.3     
+INV186 = INV2 (n356  )	            #slack = 0.02    
+G874gat = NAND2(INV187, INV188)	    #slack = 0.02    
+INV187 = INV2 (n359  )	            #slack = 0.69    
+INV188 = INV2 (n360  )	            #slack = 0.02    
+n362  = NAND2(G210gat, G268gat)	    #slack = 75.18   
+n363  = NAND2(n309  , n344  )	    #slack = 0.15    
+n364  = NAND1(INV189, n363  )	    #slack = 0       
+INV189 = INV1 (n343  )	            #slack = 0       
+n365  = NAND1(n343  , INV190)	    #slack = 1       
+INV190 = INV2 (n363  )	            #slack = 10.34   
+n366  = NAND1(n364  , n365  )	    #slack = 0       
+n367  = NAND1(G219gat, INV191)	    #slack = 0       
+INV191 = INV1 (n366  )	            #slack = 0       
+n368  = NAND1(n362  , n367  )	    #slack = 0       
+n369  = NAND2(G228gat, INV192)	    #slack = 0.15    
+INV192 = INV2 (n363  )	            #slack = 0.15    
+n370  = NAND2(G237gat, INV193)	    #slack = 20.54   
+INV193 = INV2 (n309  )	            #slack = 20.54   
+n371  = NAND2(n369  , n370  )	    #slack = 0.15    
+n372  = NAND2(G246gat, n308  )	    #slack = 32.09   
+n373  = NAND2(G159gat, INV194)	    #slack = 2.44    
+INV194 = INV2 (n212  )	            #slack = 2.44    
+n374  = NAND2(n372  , n373  )	    #slack = 2.44    
+n375  = NAND1(INV195, INV196)	    #slack = 0       
+INV195 = INV1 (n368  )	            #slack = 0       
+INV196 = INV2 (n371  )	            #slack = 0.15    
+G878gat = NAND1(INV197, INV198)	    #slack = 0       
+INV197 = INV2 (n374  )	            #slack = 2.44    
+INV198 = INV1 (n375  )	            #slack = 0       
+n377  = NAND2(G91gat, G210gat)	    #slack = 73.91   
+n378  = NAND3(n316  , n317  )	    #slack = 6.77    
+n379  = NAND2(n326  , INV199)	    #slack = 1.28    
+INV199 = INV2 (n333  )	            #slack = 1.28    
+n380  = NAND2(n326  , n336  )	    #slack = 10.98   
+n381  = NAND1(n338  , INV200)	    #slack = 0.17    
+INV200 = INV2 (n380  )	            #slack = 10.98   
+n382  = NAND2(n324  , n379  )	    #slack = 1.28    
+n383  = NAND1(n381  , INV201)	    #slack = 0.17    
+INV201 = INV2 (n382  )	            #slack = 1.28    
+n384  = NAND1(n378  , INV202)	    #slack = 0.17    
+INV202 = INV1 (n383  )	            #slack = 0.17    
+n385  = NAND1(INV203, n383  )	    #slack = 1.17    
+INV203 = INV2 (n378  )	            #slack = 16.96   
+n386  = NAND1(n384  , n385  )	    #slack = 0.17    
+n387  = NAND1(G219gat, INV204)	    #slack = 0.17    
+INV204 = INV1 (n386  )	            #slack = 0.17    
+n388  = NAND1(n377  , n387  )	    #slack = 0.17    
+n389  = NAND2(G228gat, INV205)	    #slack = 6.77    
+INV205 = INV2 (n378  )	            #slack = 6.77    
+n390  = NAND2(G237gat, INV206)	    #slack = 18.6    
+INV206 = INV2 (n316  )	            #slack = 18.6    
+n391  = NAND2(n389  , n390  )	    #slack = 6.77    
+n392  = NAND2(G246gat, n315  )	    #slack = 30.82   
+n393  = NAND2(G165gat, INV207)	    #slack = 1.84    
+INV207 = INV2 (n212  )	            #slack = 1.84    
+n394  = NAND2(n392  , n393  )	    #slack = 1.84    
+n395  = NAND1(INV208, INV209)	    #slack = 0.17    
+INV208 = INV1 (n388  )	            #slack = 0.17    
+INV209 = INV2 (n391  )	            #slack = 6.77    
+G879gat = NAND3(INV210, INV211)	    #slack = 0.17    
+INV210 = INV2 (n394  )	            #slack = 1.84    
+INV211 = INV3 (n395  )	            #slack = 0.17    
+n397  = NAND2(G96gat, G210gat)	    #slack = 73.91   
+n398  = NAND3(n324  , n326  )	    #slack = 6       
+n399  = NAND1(n336  , n338  )	    #slack = 0.17    
+n400  = NAND1(n333  , n399  )	    #slack = 0.17    
+n401  = NAND1(n398  , INV212)	    #slack = 0.17    
+INV212 = INV1 (n400  )	            #slack = 0.17    
+n402  = NAND1(INV213, n400  )	    #slack = 1.17    
+INV213 = INV2 (n398  )	            #slack = 16.19   
+n403  = NAND1(n401  , n402  )	    #slack = 0.17    
+n404  = NAND1(G219gat, INV214)	    #slack = 0.17    
+INV214 = INV1 (n403  )	            #slack = 0.17    
+n405  = NAND1(n397  , n404  )	    #slack = 0.17    
+n406  = NAND2(G228gat, INV215)	    #slack = 6       
+INV215 = INV2 (n398  )	            #slack = 6       
+n407  = NAND2(G237gat, INV216)	    #slack = 17.83   
+INV216 = INV2 (n324  )	            #slack = 17.83   
+n408  = NAND2(n406  , n407  )	    #slack = 6       
+n409  = NAND2(G246gat, n323  )	    #slack = 31.49   
+n410  = NAND2(G171gat, INV217)	    #slack = 1.84    
+INV217 = INV2 (n212  )	            #slack = 1.84    
+n411  = NAND2(n409  , n410  )	    #slack = 1.84    
+n412  = NAND1(INV218, INV219)	    #slack = 0.17    
+INV218 = INV1 (n405  )	            #slack = 0.17    
+INV219 = INV2 (n408  )	            #slack = 6       
+G880gat = NAND3(INV220, INV221)	    #slack = 0.17    
+INV220 = INV2 (n411  )	            #slack = 1.84    
+INV221 = INV3 (n412  )	            #slack = 0.17    
+G388gat = INV2 (n88   )	            #slack = 73.6    
+G389gat = INV2 (n90   )	            #slack = 62.83   
+G390gat = INV2 (n91   )	            #slack = 50.93   
+G391gat = INV2 (n92   )	            #slack = 80.71   
+G418gat = INV2 (n95   )	            #slack = 68.49   
+G423gat = INV2 (n106  )	            #slack = 62.83   
+G447gat = INV2 (n108  )	            #slack = 76.77   
+G448gat = INV2 (n111  )	            #slack = 54.66   
+G449gat = INV2 (n114  )	            #slack = 54.66   
+G450gat = INV2 (n115  )	            #slack = 62.83   
+G767gat = INV2 (n142  )	            #slack = 0.08    
+G768gat = INV2 (n169  )	            #slack = 0.08    
