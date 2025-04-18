@@ -80,11 +80,17 @@ For each level (high → low):
 
 ## 5  Build & Run
 ```bash
+# environment requirement
+download ABC opensource on web
+
+
 # compile
 make clean && make        # or simply `make`
 
 # run mapper
 ./ace  <netlist.blif>  pa2.lib
+
+
 ```
 
 Example session:
