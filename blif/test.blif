@@ -1,0 +1,17 @@
+.model abc3_in
+.inputs A B C
+.outputs out
+
+# A & B
+.names A B and_ab
+11 1
+
+# ~(A & B)
+.names and_ab nand_ab
+0 1
+
+# (~(A & B)) & C
+.names nand_ab C out
+11 1
+
+.end

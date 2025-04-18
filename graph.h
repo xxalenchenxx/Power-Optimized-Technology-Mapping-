@@ -50,18 +50,18 @@ public:
     void setDelay(double delay)                 { _delay = delay; }
 
 private:
-    int             _id;    // id of the node (indicating the cell)
-    double          _level;
-    string          _Name;
-    string          _gateType;
+    int                      _id;    // id of the node (indicating the cell)
+    double                _level;    //該node的level (因為有not，會-0.5，所以double型態)
+    string                 _Name;
+    string             _gateType;
     string          _patternType;
     double          _arrivalTime;
     double          _requireTime;
-    double          _slack;
-    double          _power;
-    double          _delay;
-    vector<int>     _fanIn;  
-    vector<int>     _fanOut; 
+    double                _slack;
+    double                _power;
+    double                _delay;
+    vector<int>           _fanIn;  
+    vector<int>          _fanOut; 
 };
 
 class Graph
@@ -76,19 +76,17 @@ public:
     double getInitialDelay()                    { return _initialDelay; }
     double getTotalPower()                      { return _totalPower; }
     double getMinimizedPower()                  { return _MinimizedPower; }
+    double getLevel(int i)                      { return _LevelArray[i]; }
+    double getLevelArraySize()                  { return _LevelArray.size(); }
     Node* getNode(int nodeId)                   { return _NodeArray[nodeId]; }
     Node* getPi(int piId)                       { return _PiArray[piId]; }
     Node* getPo(int poId)                       { return _PoArray[poId]; }
-
-    
     Node* getCritical(int criticalId)           { return _criticalPath[criticalId]; }
-    double getLevel(int i)                      { return _LevelArray[i]; }
+    Node* idToNode(int id)                      { return _Id2Node[id]; }
     int getNodeArraySize()                      { return _NodeArray.size(); }
     int getPiArraySize()                        { return _PiArray.size(); }
     int getPoArraySize()                        { return _PoArray.size(); }
     int getCriticalSize()                       { return _criticalPath.size(); }
-    double getLevelArraySize()                  { return _LevelArray.size(); }
-    Node* idToNode(int id)                      { return _Id2Node[id]; }
     vector<int> levelToList(double level)       { return _Level2NodeList[level]; }
 
     // Set functions
@@ -101,18 +99,17 @@ public:
     void addCritical(Node* critical)                                { _criticalPath.push_back(critical); }
     void insertMap(int id, Node* insertNode)                        { _Id2Node.insert(pair<int, Node*> (id,insertNode)); }
     void resetCriticalPath()                                        { _criticalPath.clear(); }
-    void insertLevelList(double level, int id)  
-    { 
+    void insertLevelList(double level, int id){ 
         if (_Level2NodeList.find(level) == _Level2NodeList.end())
         {
             _LevelArray.push_back(level);
             _Level2NodeList[level] = { id };
         }
-        else
+        else{
             _Level2NodeList[level].push_back(id);
+        }
     }
-    void sortLevelArray(int mode)                       
-    { 
+    void sortLevelArray(int mode){ 
         if(mode == 0)
             sort(_LevelArray.begin(), _LevelArray.end()); 
         else if(mode == 1)
@@ -123,13 +120,13 @@ private:
     double                      _initialDelay;
     double                      _totalPower;
     double                      _MinimizedPower;
-    vector<Node*>               _NodeArray;
-    vector<Node*>               _PiArray;
-    vector<Node*>               _PoArray;
-    vector<double>              _LevelArray;
+    vector<Node*>               _NodeArray;     //紀錄gate的node
+    vector<Node*>               _PiArray;       //紀錄PI的node
+    vector<Node*>               _PoArray;       //紀錄PO的node
+    vector<double>              _LevelArray;    
     vector<Node*>               _criticalPath;
-    map<int, Node*>             _Id2Node;
-    map<double, vector<int>>    _Level2NodeList;
+    map<int, Node*>             _Id2Node;        //利用ID來map對應的Node
+    map<double, vector<int>>    _Level2NodeList; //存放個個level的nodeID
 };
 
 #endif  // GRAPH_H
