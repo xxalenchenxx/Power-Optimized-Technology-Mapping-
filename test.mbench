@@ -1,0 +1,14 @@
+Initial delay  : 4.28
+Final delay    : 4.28
+Original  power: 72.44
+Optimized power: 72.44
+
+INPUT(A)
+INPUT(B)
+INPUT(C)
+
+OUTPUT(out)
+
+n5    = NAND1(A     , B     )	    #slack = 0       
+n6    = NAND1(C     , n5    )	    #slack = 0       
+out   = INV1 (n6    )	            #slack = 0       

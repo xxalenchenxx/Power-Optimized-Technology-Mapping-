@@ -32,20 +32,45 @@ extern "C" {
     extern char *      Abc_ObjName( Abc_Obj_t * pNode );
 }
 Graph* graph = new Graph();
+
+void ResetAllNodeTiming() {
+    // 針對所有 PI、NAND、INV 等節點，將 arrival 和 required time 重設
+    for (int i = 0; i < graph->getLevelArraySize(); ++i) {
+        vector<int> TargetLevelList = graph->levelToList(graph->getLevel(i));
+        for(long unsigned int j=0; j<TargetLevelList.size(); j++)
+        {
+            Node* TargetNode = graph->idToNode(TargetLevelList[j]);
+            TargetNode->setArTime(0);
+            TargetNode->setRqTime(DBL_MAX);
+        }
+        // Node* n = graph->getNode(i);
+        // std::string gt = n->getGateType();
+        // if (gt == "NAND" || gt == "INV") {
+        //     n->setArTime(0);
+        //     n->setRqTime(DBL_MAX);
+        // }
+    }
+}
+
 double ASAP()
 {
     double MaxArTime = 0;
     for(int i=0; i<graph->getLevelArraySize(); i++)
     {
         vector<int> TargetLevelList = graph->levelToList(graph->getLevel(i));
+        // printf("graph->getLevel(%d): %f\n",i,graph->getLevel(i));
         for(long unsigned int j=0; j<TargetLevelList.size(); j++)
         {
             Node* TargetNode = graph->idToNode(TargetLevelList[j]);
+            // std::cout << "TargetNode: " << TargetNode->getName() << '\n';
             for(int k=0; k<TargetNode->getFanOutSize(); k++)
-            {
+            { 
                 Node* TargetFanOutNode = graph->idToNode(TargetNode->getFanOut(k));
-                if( (TargetNode->getArTime() + TargetFanOutNode->getDelay()) > (TargetFanOutNode->getArTime()) )
+                if( (TargetNode->getArTime() + TargetFanOutNode->getDelay()) > (TargetFanOutNode->getArTime()) ){
                     TargetFanOutNode->setArTime(TargetNode->getArTime() + TargetFanOutNode->getDelay());
+                    // std::cout << "TargetFanOutNode: " << TargetFanOutNode->getName() <<" "<< TargetFanOutNode->getArTime<< '\n';
+                }
+
                 if( MaxArTime < TargetNode->getArTime() + TargetFanOutNode->getDelay())
                     MaxArTime = TargetNode->getArTime() + TargetFanOutNode->getDelay();
             }
@@ -56,12 +81,15 @@ double ASAP()
 
 void ALAP(double MaxArTime, double tolerance)
 {
+
     for(int i=0; i<graph->getLevelArraySize(); i++)
     {
+        // printf("[ALAP] graph->getLevel(%d): %f\n",i,graph->getLevel(i));
         vector<int> TargetLevelList = graph->levelToList(graph->getLevel(i));
         for(long unsigned int j=0; j<TargetLevelList.size(); j++)
         {
             Node* TargetNode = graph->idToNode(TargetLevelList[j]);
+            // cout << "[ALAP] TargetNode: " << TargetNode->getName() << '\n';
             if(TargetNode->getFanOutSize() == 0)
                     TargetNode->setRqTime(MaxArTime);
             for(int k=0; k<TargetNode->getFanInSize(); k++)
@@ -77,7 +105,6 @@ void ALAP(double MaxArTime, double tolerance)
             }
         }
     }
-
 }
 
 void BacktraceCritical(double eps)
@@ -102,7 +129,7 @@ void BacktraceCritical(double eps)
             Node* pred = graph->idToNode(cur->getFanIn(k));
             double edgeDelay = cur->getDelay();   // 或存 edge delay
             if (fabs(pred->getArTime() + edgeDelay - cur->getArTime()) <= eps) {
-                if (pred->getSlack() > 0) pred->setSlack(0);
+                // if (pred->getSlack() > 0) pred->setSlack(0);
                 graph->addCritical(pred);
                 q.push(pred);
             }
@@ -122,7 +149,14 @@ bool CalSlackAndPower(double tol)
         double slack = (fabs(diff) <= tol) ? 0 : diff;
         n->setSlack(slack);
         graph->setTotalPower(graph->getTotalPower() + n->getPower());
-        if (slack < 0) timingViol = true;
+        // printf("[TargetNode: %s Rq: %f, Ar: %f\n", n->getName().c_str(),n->getRqTime(), n->getArTime());
+        if (slack < 0){
+
+            timingViol = true;
+        } 
+        // if(slack <= 0.01){
+        //     graph->addCritical(n);
+        // }
     }
 
     // 再用路徑回溯標 Critical
@@ -140,74 +174,70 @@ bool CheckCritical(int nodeId)
     bool flag = false;
     for(int i=0; i<graph->getCriticalSize(); i++)
     {
-        if( nodeId == graph->getCritical(i)->getId() )
+        if( nodeId == graph->getCritical(i)->getId() ){
             flag = true;
+            break;
+        }
+            
     }
     return flag;
 }
 
-void GlobalPowerMinimize(double tolerance) {
-    bool updated = true;
-    while (updated) {
-        updated = false;
-        graph->setTotalPower(0);
-
-        for (int i = 0; i < graph->getLevelArraySize(); ++i) {
-            vector<int> nodes = graph->levelToList(graph->getLevel(i));
-            for (int j = 0; j < nodes.size(); ++j) {
-                Node* node = graph->idToNode(nodes[j]);
-
-                // 原本延遲與功耗
-                double originalDelay = node->getDelay();
-                double originalPower = node->getPower();
-                string originalPattern = node->getPatternType();
-
-                // 嘗試替換各種 pattern
-                struct GateOption {
-                    string pattern;
-                    double delayBase;
-                    double delayFactor;
-                    double power;
-                };
-
-                vector<GateOption> options;
-
-                if (node->getGateType() == "NAND") {
-                    options = {
-                        {"NAND2", 2.31, 5.95, 1.4},
-                        {"NAND3", 1.16, 3.0, 10.82}
-                    };
-                } else if (node->getGateType() == "INV") {
-                    options = {
-                        {"INV2", 1.03, 2.64, 1},
-                        {"INV3", 0.47, 1.2, 2.75}
-                    };
-                }
-
-                for (auto& opt : options) {
-                    double newDelay = opt.delayBase + opt.delayFactor * node->getFanOutSize();
-                    double delayInc = newDelay - originalDelay;
-                    //只要新的delay<=原本slack時間+忍受值 且 power有下降
-                    if (delayInc <= node->getSlack() + tolerance  && originalPower > opt.power) {
-                        // 成功替換
-                        node->setPatternType(opt.pattern);
-                        node->setDelay(newDelay);
-                        node->setPower(opt.power);
-                        updated = true;
-                        break; // 每個 node 只換一種最合適 pattern
-                    }
-                }
-            }
-        }
-
-        // Timing Re-evaluation
-        double maxAr = ASAP();
-        graph->sortLevelArray(1);
-        ALAP(maxAr, tolerance);
-        CalSlackAndPower(tolerance); // 更新 slack 與 totalPower
-        graph->setMinimizedPower(graph->getTotalPower());
-    }
-}
+// void GlobalPowerMinimize(double tolerance) {
+//     bool updated = true;
+//     while (updated) {
+//         updated = false;
+//         graph->setTotalPower(0);
+//         for (int i = 0; i < graph->getLevelArraySize(); ++i) {
+//             vector<int> nodes = graph->levelToList(graph->getLevel(i));
+//             for (int j = 0; j < nodes.size(); ++j) {
+//                 Node* node = graph->idToNode(nodes[j]);
+//                 // 原本延遲與功耗
+//                 double originalDelay = node->getDelay();
+//                 double originalPower = node->getPower();
+//                 string originalPattern = node->getPatternType();
+//                 // 嘗試替換各種 pattern
+//                 struct GateOption {
+//                     string pattern;
+//                     double delayBase;
+//                     double delayFactor;
+//                     double power;
+//                 };
+//                 vector<GateOption> options;
+//                 if (node->getGateType() == "NAND") {
+//                     options = {
+//                         {"NAND2", 2.31, 5.95, 1.4},
+//                         {"NAND3", 1.16, 3.0, 10.82}
+//                     };
+//                 } else if (node->getGateType() == "INV") {
+//                     options = {
+//                         {"INV2", 1.03, 2.64, 1},
+//                         {"INV3", 0.47, 1.2, 2.75}
+//                     };
+//                 }
+//                 for (auto& opt : options) {
+//                     double newDelay = opt.delayBase + opt.delayFactor * node->getFanOutSize();
+//                     double delayInc = newDelay - originalDelay;
+//                     //只要新的delay<=原本slack時間+忍受值 且 power有下降
+//                     if (delayInc <= node->getSlack() + tolerance  && originalPower > opt.power) {
+//                         // 成功替換
+//                         node->setPatternType(opt.pattern);
+//                         node->setDelay(newDelay);
+//                         node->setPower(opt.power);
+//                         updated = true;
+//                         break; // 每個 node 只換一種最合適 pattern
+//                     }
+//                 }
+//             }
+//         }
+//         // Timing Re-evaluation
+//         double maxAr = ASAP();
+//         graph->sortLevelArray(1);
+//         ALAP(maxAr, tolerance);
+//         CalSlackAndPower(tolerance); // 更新 slack 與 totalPower
+//         graph->setMinimizedPower(graph->getTotalPower());
+//     }
+// }
 
 
 int main(int argc, char** argv)
@@ -227,7 +257,7 @@ int main(int argc, char** argv)
     printf("outputfile: %s\n", outputFile.c_str());
 	//Extract node
 	int invId, invNum;
-    double tolerance = 1e-9;    //計算slack的誤差臨界(福點數用)
+    double tolerance = 1e-9;    //計算ASAP, ALAP, slack的誤差臨界(福點數用)
     invId = Abc_NtkObjNum(ntk); //總共邏輯元件 (包含 PI,PO,gate)，之後要新增INV時，可以使用這個做為新的ID
     invNum = 0;
 
@@ -384,13 +414,12 @@ int main(int argc, char** argv)
 
 
     //Power Minimization
-    double LastPower = originTotalPower;
-    int it=0;
-
     #pragma region mini_power_No_critical
-    // while(1)
+    // double LastPower = originTotalPower;
+    // int it=0;
+    // while(true)
     // {   
-    //     printf("it: %d\n",it);
+    //     printf("================it: %d================\n",it);
     //     for(int i=0; i<graph->getLevelArraySize(); i++)
     //     {
     //         vector<int> TargetLevelList = graph->levelToList(graph->getLevel(i));
@@ -431,11 +460,14 @@ int main(int argc, char** argv)
     //             }
     //         }
     //         graph->setTotalPower(0);
+    //         // graph->sortLevelArray(0);
+    //         // ResetAllNodeTiming();
     //         MaxArTime = ASAP();
     //         graph->sortLevelArray(1);
     //         ALAP(MaxArTime, tolerance);
     //         TimingViolation = CalSlackAndPower(tolerance);
-    //         graph->setMinimizedPower(graph->getTotalPower());     
+    //         graph->setMinimizedPower(graph->getTotalPower());
+    //         break;     
     //     }
     //     if(LastPower == graph->getMinimizedPower())
     //         break;
@@ -443,12 +475,76 @@ int main(int argc, char** argv)
     //         LastPower =  graph->getMinimizedPower();
     //     it++;
     // }
+
+    double slack_tol = 0.5f;
+    double LastPower = originTotalPower;
+    int it=0;
+    while(1)
+    {   
+        // printf("it: %d\n",it);
+        for(int i=0; i<graph->getLevelArraySize(); i++)
+        {
+            vector<int> TargetLevelList = graph->levelToList(graph->getLevel(i));
+            for(long unsigned int j=0; j<TargetLevelList.size(); j++)
+            {
+                Node* TargetNode = graph->idToNode(TargetLevelList[j]);
+                // if( CheckCritical(TargetLevelList[j]) ) //critical path上的點跳過
+                //     continue;
+
+                if( TargetNode->getGateType() == "NAND" )
+                {
+                    if( TargetNode->getSlack() + slack_tol >= ( (2.31+5.95*TargetNode->getFanOutSize()) - TargetNode->getDelay() ) )
+                    {
+                        TargetNode->setPatternType("NAND2");
+                        TargetNode->setDelay(2.31+5.95*TargetNode->getFanOutSize());
+                        TargetNode->setPower(1.4);                       
+                    }
+                    else if ( TargetNode->getSlack() + slack_tol >= ( (1.16+3*TargetNode->getFanOutSize()) - TargetNode->getDelay() ) )
+                    {
+                        TargetNode->setPatternType("NAND3");
+                        TargetNode->setDelay(1.16+3*TargetNode->getFanOutSize());
+                        TargetNode->setPower(10.82);
+                    }
+                }
+                else if( TargetNode->getGateType() == "INV" )
+                {
+                    if( TargetNode->getSlack() + slack_tol >= ( (1.03+2.64*TargetNode->getFanOutSize()) - TargetNode->getDelay()  ) )
+                    {
+                        TargetNode->setPatternType("INV2");
+                        TargetNode->setDelay(1.03+2.64*TargetNode->getFanOutSize());
+                        TargetNode->setPower(1);
+                    }
+                    else if ( TargetNode->getSlack() + slack_tol >= ( (0.47+1.2*TargetNode->getFanOutSize()) - TargetNode->getDelay() ) )
+                    {
+                        TargetNode->setPatternType("INV3");
+                        TargetNode->setDelay(0.47+1.2*TargetNode->getFanOutSize());
+                        TargetNode->setPower(2.75);
+                    }
+                }
+            }
+            graph->setTotalPower(0.0);
+            ResetAllNodeTiming();
+            graph->sortLevelArray(0);
+            MaxArTime = ASAP();
+            graph->sortLevelArray(1);
+            ALAP(MaxArTime, tolerance);
+            TimingViolation = CalSlackAndPower(tolerance);
+            graph->setMinimizedPower(graph->getTotalPower());
+
+        }
+        if(LastPower == graph->getMinimizedPower())
+            break;
+        else if(LastPower != graph->getMinimizedPower() || TimingViolation) 
+            LastPower =  graph->getMinimizedPower();
+        it++;
+    }
     #pragma endregion
     
     // 進一步優化：允許 critical path 上也換
-    GlobalPowerMinimize(tolerance);
-
+    // GlobalPowerMinimize(tolerance);
+    #pragma region output
     //final dedlay
+    graph->sortLevelArray(0);
     double final_delay = ASAP();                                 //ASAP
     //Write file
     ofstream ofs;
@@ -505,6 +601,7 @@ int main(int argc, char** argv)
     }
     ofs.close();
 	cout<<"done!!"<<endl;
+    #pragma endregion
 	// << End ABC >>
 	Abc_Stop();
 	
